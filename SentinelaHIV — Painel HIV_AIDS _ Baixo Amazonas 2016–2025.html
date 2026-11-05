@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SentinelaHIV · Baixo Amazonas 2016–2025</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#08111e;--bg2:#0d1b2e;--card:#0f2035;--border:#1a3550;
+  --text:#ddeeff;--muted:#6b8aaa;--accent:#0ea5e9;--teal:#14b8a6;
+  --amber:#f59e0b;--rose:#f43f5e;--violet:#8b5cf6;--green:#22c55e;
+  color-scheme:dark;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media(prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --bg:#f0f9ff;--bg2:#e0f2fe;--card:#fff;--border:#bae6fd;
+    --text:#0c4a6e;--muted:#0369a1;color-scheme:light;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#08111e;--bg2:#0d1b2e;--card:#0f2035;--border:#1a3550;
+  --text:#ddeeff;--muted:#6b8aaa;color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;min-height:100%}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#0369a1;z-index:20}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#0369a1 0%,#0ea5e9 55%,#0d9488 100%);padding:1.4rem 1.5rem;top:env(safe-area-inset-top,0px);position:sticky;z-index:10}
+.hdr-in{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
+.hdr h1{font-size:1.4rem;font-weight:700;color:#fff}
+.hdr p{font-size:.8rem;color:rgba(255,255,255,.75);margin-top:.2rem}
+.tags{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.5rem}
+.tag{background:rgba(255,255,255,.18);color:#fff;font-size:.68rem;padding:.18rem .55rem;border-radius:999px}
+.tbtn{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.3);padding:.35rem .8rem;border-radius:8px;cursor:pointer;font-size:.75rem}
+.tbtn:hover{background:rgba(255,255,255,.28)}
+
+/* LAYOUT */
+.wrap{max-width:1280px;margin:0 auto;padding:1.3rem}
+
+/* KPI */
+.krow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.85rem;margin-bottom:1.3rem}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:1rem;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--c,var(--accent))}
+.kpi-l{font-size:.67rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.kpi-v{font-size:1.8rem;font-weight:700;color:var(--c,var(--accent));margin:.15rem 0}
+.kpi-s{font-size:.72rem;color:var(--muted)}
+
+/* ALERT */
+.alert{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:9px;padding:.75rem 1rem;font-size:.78rem;color:var(--amber);margin-bottom:1.3rem;line-height:1.55}
+
+/* SECTION */
+.sec{margin-bottom:1.8rem}
+.sec-h{font-size:.9rem;font-weight:600;color:var(--accent);border-left:3px solid var(--accent);padding-left:.65rem;margin-bottom:.75rem}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:.85rem}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.85rem}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:1rem}
+.ct{font-size:.74rem;color:var(--muted);margin-bottom:.7rem;font-weight:500}
+.cw{position:relative}
+.h200{height:200px}.h280{height:280px}.h340{height:340px}
+
+/* HIGHLIGHT BOX */
+.hl{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.65rem .8rem;margin-bottom:.5rem}
+.hl-l{font-size:.65rem;text-transform:uppercase;color:var(--muted);letter-spacing:.05em}
+.hl-v{font-size:1.05rem;font-weight:600;margin:.1rem 0}
+.hl-s{font-size:.7rem;color:var(--muted)}
+
+/* FOOTER */
+.footer{font-size:.7rem;color:var(--muted);border-top:1px solid var(--border);padding-top:.9rem;margin-top:.5rem;line-height:1.65}
+.footer a{color:var(--accent);text-decoration:none}
+
+/* CHAT */
+.cbtn{position:fixed;bottom:1.5rem;right:1.5rem;width:50px;height:50px;border-radius:50%;background:var(--teal);border:none;cursor:pointer;color:#fff;font-size:1.25rem;box-shadow:0 4px 20px rgba(20,184,166,.45);z-index:300;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.cbtn:hover{transform:scale(1.1)}
+.cpanel{position:fixed;bottom:4.3rem;right:1.5rem;width:355px;max-width:calc(100vw - 2rem);background:var(--card);border:1px solid var(--border);border-radius:15px;box-shadow:0 12px 40px rgba(0,0,0,.55);z-index:300;display:flex;flex-direction:column;max-height:510px}
+.cpanel.hidden{display:none}
+.chead{background:linear-gradient(135deg,#0369a1,#0d9488);padding:.85rem 1rem;border-radius:15px 15px 0 0;color:#fff}
+.chead h4{font-size:.85rem;font-weight:600}
+.chead small{font-size:.7rem;opacity:.8}
+.cmsgs{flex:1;overflow-y:auto;padding:.9rem;display:flex;flex-direction:column;gap:.55rem;min-height:150px}
+.msg{padding:.5rem .75rem;border-radius:9px;font-size:.8rem;max-width:88%;line-height:1.45}
+.msg.u{background:var(--teal);color:#fff;align-self:flex-end}
+.msg.b{background:var(--bg2);color:var(--text);align-self:flex-start;border:1px solid var(--border)}
+.msg.t{color:var(--muted);font-style:italic;align-self:flex-start;font-size:.75rem}
+.csugg{padding:.45rem .8rem;display:flex;gap:.3rem;flex-wrap:wrap;border-top:1px solid var(--border)}
+.csugg button{background:var(--bg2);border:1px solid var(--border);color:var(--muted);padding:.22rem .52rem;border-radius:999px;font-size:.67rem;cursor:pointer}
+.csugg button:hover{border-color:var(--teal);color:var(--teal)}
+.cinp{display:flex;border-top:1px solid var(--border)}
+.cinp input{flex:1;background:transparent;border:none;padding:.7rem .85rem;color:var(--text);font-size:.8rem;outline:none}
+.cinp input::placeholder{color:var(--muted)}
+.cinp button{background:var(--teal);border:none;padding:0 1rem;color:#fff;cursor:pointer;font-size:.85rem;border-radius:0 0 15px 0}
+
+@media(max-width:580px){
+  .hdr h1{font-size:1.1rem}
+  .kpi-v{font-size:1.4rem}
+  .cpanel{right:.5rem;left:.5rem;width:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <div>
+      <h1>🧬 SentinelaHIV — Painel HIV/AIDS | Baixo Amazonas</h1>
+      <p>Vigilância Epidemiológica SESPA · Base: SINAN / DATASUS · Pará</p>
+      <div class="tags">
+        <span class="tag">📅 2016–2025</span>
+        <span class="tag">📍 13 Municípios</span>
+        <span class="tag">🔬 2.481 Notificações</span>
+        <span class="tag">🤖 Análise Conversacional</span>
+      </div>
+    </div>
+    <button class="tbtn" onclick="toggleTheme()">🌙 Tema</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="krow">
+    <div class="kpi" style="--c:#14b8a6">
+      <div class="kpi-l">Total Notificações</div>
+      <div class="kpi-v">2.481</div>
+      <div class="kpi-s">HIV/AIDS · 2016–2025</div>
+    </div>
+    <div class="kpi" style="--c:#f59e0b">
+      <div class="kpi-l">Crescimento Decenal</div>
+      <div class="kpi-v">+136%</div>
+      <div class="kpi-s">157 (2016) → 371 (2025)</div>
+    </div>
+    <div class="kpi" style="--c:#8b5cf6">
+      <div class="kpi-l">Municípios</div>
+      <div class="kpi-v">13</div>
+      <div class="kpi-s">Baixo Amazonas – PA</div>
+    </div>
+    <div class="kpi" style="--c:#0ea5e9">
+      <div class="kpi-l">Maior Carga</div>
+      <div class="kpi-v">52,0%</div>
+      <div class="kpi-s">Santarém · 1.291 casos</div>
+    </div>
+    <div class="kpi" style="--c:#f43f5e">
+      <div class="kpi-l">Trans. Vertical</div>
+      <div class="kpi-v">198</div>
+      <div class="kpi-s">8,0% · mãe → filho</div>
+    </div>
+  </div>
+
+  <div class="alert">
+    ⚠️ <strong>Aviso metodológico:</strong> Os dados representam notificações registradas no SINAN e correspondem ao município de <em>ocorrência</em>. Não equivalem à prevalência real — subnotificação, qualidade de preenchimento e cobertura assistencial afetam diretamente a série, especialmente em municípios de pequeno porte. Dados representativos elaborados com base em padrões epidemiológicos regionais do SINAN/DATASUS para fins de demonstração acadêmica.
+  </div>
+
+  <div class="sec">
+    <div class="sec-h">📈 Evolução Anual das Notificações de HIV/AIDS (2016–2025)</div>
+    <div class="card">
+      <div class="ct">Notificações anuais no Baixo Amazonas · anomalia de 2020 (COVID-19 — interrupção dos fluxos de vigilância)</div>
+      <div class="cw h280"><canvas id="cT"></canvas></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h">📍 Distribuição Municipal</div>
+    <div class="g2">
+      <div class="card">
+        <div class="ct">Total acumulado por município (2016–2025)</div>
+        <div class="cw h340"><canvas id="cM"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">Tendência temporal — 5 principais municípios</div>
+        <div class="cw h340"><canvas id="cTop"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h">👥 Perfil Epidemiológico das Notificações</div>
+    <div class="g3">
+      <div class="card">
+        <div class="ct">Distribuição por sexo</div>
+        <div class="cw h200"><canvas id="cSex"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">Faixa etária</div>
+        <div class="cw h200"><canvas id="cAge"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">Raça/Cor autodeclarada</div>
+        <div class="cw h200"><canvas id="cRace"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h">🔗 Exposição e Destaques Analíticos</div>
+    <div class="g2">
+      <div class="card">
+        <div class="ct">Categoria de exposição provável</div>
+        <div class="cw h200"><canvas id="cExp"></canvas></div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:.5rem;justify-content:center">
+        <div class="hl">
+          <div class="hl-l">Faixa etária mais notificada</div>
+          <div class="hl-v" style="color:var(--teal)">30–39 anos</div>
+          <div class="hl-s">724 notificações (29,2% do total)</div>
+        </div>
+        <div class="hl">
+          <div class="hl-l">Transmissão predominante</div>
+          <div class="hl-v" style="color:var(--accent)">Sexual</div>
+          <div class="hl-s">1.687 notificações (68,0%)</div>
+        </div>
+        <div class="hl">
+          <div class="hl-l">Adolescentes (13–19 anos)</div>
+          <div class="hl-v" style="color:var(--rose)">187 casos (7,5%)</div>
+          <div class="hl-s">Grupo de atenção prioritária para prevenção</div>
+        </div>
+        <div class="hl">
+          <div class="hl-l">Queda em 2020 (COVID-19)</div>
+          <div class="hl-v" style="color:var(--amber)">−47,3%</div>
+          <div class="hl-s">239 (2019) → 126 (2020) · ruptura do fluxo SINAN</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>Fonte:</strong> Sistema de Informação de Agravos de Notificação (SINAN) / DATASUS – Ministério da Saúde.
+    Painel HIV/AIDS: <a href="https://www.gov.br/saude/pt-br/composicao/svsa/cnie/painel-hiv">gov.br/saude/painel-hiv</a>.<br>
+    <strong>Recorte:</strong> 13 municípios do Baixo Amazonas, Pará · Série temporal 2016–2025 · Unidade de análise: notificação/evento.<br>
+    <strong>Elaboração:</strong> SentinelaHIV · Curso Introdução à Ciência de Dados · IEG/UFOPA · 2026
+  </div>
+</div>
+
+<button class="cbtn" onclick="toggleChat()" title="Análise Conversacional">💬</button>
+
+<div class="cpanel hidden" id="cpanel">
+  <div class="chead">
+    <h4>🤖 Análise Conversacional — HIV/AIDS</h4>
+    <small>Pergunte sobre os dados do Baixo Amazonas (2016–2025)</small>
+  </div>
+  <div class="cmsgs" id="cmsgs">
+    <div class="msg b">Olá! Sou sua analista de dados sobre HIV/AIDS no Baixo Amazonas. Posso responder perguntas baseadas nas 2.481 notificações de 2016 a 2025 nos 13 municípios. O que deseja saber?</div>
+  </div>
+  <div class="csugg">
+    <button onclick="ask('Qual município teve maior crescimento percentual entre 2016 e 2025?')">📊 Maior crescimento?</button>
+    <button onclick="ask('Qual o perfil demográfico das vítimas?')">👥 Perfil demográfico</button>
+    <button onclick="ask('Por que houve queda abrupta em 2020?')">📉 Queda em 2020</button>
+    <button onclick="ask('Qual a importância da transmissão vertical nesses dados?')">👶 Trans. vertical</button>
+  </div>
+  <div class="cinp">
+    <input id="cinput" type="text" placeholder="Digite sua pergunta..." onkeydown="if(event.key==='Enter')sendMsg()">
+    <button onclick="sendMsg()">➤</button>
+  </div>
+</div>
+
+<script>
+const D={
+  years:[2016,2017,2018,2019,2020,2021,2022,2023,2024,2025],
+  annual:[157,176,204,239,126,255,289,318,346,371],
+  muni:{
+    'Santarém':        [89,95,112,128,73,134,148,162,171,179],
+    'Oriximiná':       [18,22,25,28,15,31,35,38,42,45],
+    'Óbidos':          [12,14,16,19,10,21,24,27,29,32],
+    'Juruti':          [8,9,10,13,6,14,16,18,20,22],
+    'Alenquer':        [7,8,9,11,5,12,14,15,17,19],
+    'Monte Alegre':    [6,7,8,10,4,11,13,14,16,18],
+    'Almeirim':        [5,6,7,8,4,9,10,12,13,14],
+    'Mojuí dos Campos':[3,4,4,5,2,6,7,8,9,10],
+    'Prainha':         [3,3,4,5,2,5,6,7,8,9],
+    'Terra Santa':     [2,3,3,4,2,4,5,6,7,8],
+    'Faro':            [2,2,2,3,1,3,4,4,5,6],
+    'Belterra':        [1,2,2,3,1,3,4,4,5,5],
+    'Curuá':           [1,1,2,2,1,2,3,3,4,4]
+  },
+  sex:{Feminino:1143,Masculino:1338},
+  age:{'<5a':23,'5–12a':15,'13–19a':187,'20–29a':681,'30–39a':724,'40–49a':456,'50–59a':231,'60+':164},
+  race:{Parda:1983,Branca:198,Preta:165,'Indígena':73,Amarela:33,Ignorada:29},
+  exp:{Sexual:1687,Vertical:198,'Sanguínea':56,'Ign./Outros':540}
+};
+
+const C=['#14b8a6','#0ea5e9','#f59e0b','#f43f5e','#8b5cf6','#22c55e','#fb923c','#e879f9','#a3e635','#38bdf8','#fb7185','#c084fc','#34d399'];
+const gc=(id)=>document.getElementById(id).getContext('2d');
+const grd={color:'rgba(255,255,255,.04)'};
+const tk={color:'#6b8aaa',font:{size:10}};
+
+new Chart(gc('cT'),{type:'line',data:{labels:D.years,datasets:[{label:'Notificações',data:D.annual,borderColor:'#14b8a6',backgroundColor:'rgba(20,184,166,.1)',fill:true,tension:.42,pointRadius:5,pointHoverRadius:8,borderWidth:2.5,pointBackgroundColor:'#14b8a6'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw} notificações`}}},scales:{x:{grid:grd,ticks:tk},y:{grid:grd,ticks:tk,beginAtZero:true}}}});
+
+const mk=Object.keys(D.muni),mt=mk.map(k=>D.muni[k].reduce((a,b)=>a+b,0)),ms=mk.map((k,i)=>({k,v:mt[i]})).sort((a,b)=>a.v-b.v);
+new Chart(gc('cM'),{type:'bar',data:{labels:ms.map(m=>m.k),datasets:[{data:ms.map(m=>m.v),backgroundColor:C.slice(0,13).reverse(),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw} (${(c.raw/2481*100).toFixed(1)}%)`}}},scales:{x:{grid:grd,ticks:tk},y:{ticks:{...tk,font:{size:9}}}}}});
+
+const top5=mk.map(k=>({k,tot:D.muni[k].reduce((a,b)=>a+b,0),v:D.muni[k]})).sort((a,b)=>b.tot-a.tot).slice(0,5);
+new Chart(gc('cTop'),{type:'line',data:{labels:D.years,datasets:top5.map((m,i)=>({label:m.k,data:m.v,borderColor:C[i],backgroundColor:'transparent',tension:.35,borderWidth:2.2,pointRadius:3}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#6b8aaa',font:{size:9},boxWidth:10,padding:6}}},scales:{x:{grid:grd,ticks:tk},y:{grid:grd,ticks:tk,beginAtZero:true}}}});
+
+new Chart(gc('cSex'),{type:'doughnut',data:{labels:Object.keys(D.sex),datasets:[{data:Object.values(D.sex),backgroundColor:['#f43f5e','#0ea5e9'],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom',labels:{color:'#6b8aaa',font:{size:9},padding:7}}}}});
+
+new Chart(gc('cAge'),{type:'bar',data:{labels:Object.keys(D.age),datasets:[{data:Object.values(D.age),backgroundColor:'#8b5cf6',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#6b8aaa',font:{size:8},maxRotation:40}},y:{grid:grd,ticks:tk,beginAtZero:true}}}});
+
+new Chart(gc('cRace'),{type:'doughnut',data:{labels:Object.keys(D.race),datasets:[{data:Object.values(D.race),backgroundColor:['#f59e0b','#14b8a6','#f43f5e','#22c55e','#8b5cf6','#64748b'],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom',labels:{color:'#6b8aaa',font:{size:8},padding:5}}}}});
+
+new Chart(gc('cExp'),{type:'bar',data:{labels:Object.keys(D.exp),datasets:[{data:Object.values(D.exp),backgroundColor:['#14b8a6','#f59e0b','#f43f5e','#64748b'],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw} (${(c.raw/2481*100).toFixed(1)}%)`}}},scales:{x:{ticks:tk},y:{grid:grd,ticks:tk,beginAtZero:true}}}});
+
+function toggleTheme(){const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'':' dark'}
+let open=false;
+function toggleChat(){open=!open;document.getElementById('cpanel').classList.toggle('hidden',!open)}
+function ask(q){document.getElementById('cinput').value=q;sendMsg()}
+
+const SYS=`Você é uma especialista em saúde pública e epidemiologia analisando dados de HIV/AIDS do Baixo Amazonas, Pará.
+
+DADOS (SINAN/DATASUS – 2016–2025 – 13 municípios):
+Total: 2.481 notificações
+
+Série temporal: 2016:157|2017:176|2018:204|2019:239|2020:126|2021:255|2022:289|2023:318|2024:346|2025:371
+Crescimento total 2016→2025: +136,3%
+
+Por município (total acumulado):
+Santarém:1291(52,0%)|Oriximiná:299(12,1%)|Óbidos:204(8,2%)|Juruti:136(5,5%)|Alenquer:117(4,7%)|Monte Alegre:107(4,3%)|Almeirim:88(3,6%)|Mojuí:58(2,3%)|Prainha:52(2,1%)|Terra Santa:44(1,8%)|Belterra:34(1,4%)|Faro:32(1,3%)|Curuá:25(1,0%)
+
+Sexo: Feminino 1143 (46,1%) | Masculino 1338 (53,9%)
+Faixa etária: <5a:23|5-12a:15|13-19a:187|20-29a:681|30-39a:724|40-49a:456|50-59a:231|60+:164
+Raça/Cor: Parda:1983(79,9%)|Branca:198|Preta:165|Indígena:73|Amarela:33|Ignorada:29
+Exposição: Sexual:1687(68,0%)|Vertical:198(8,0%)|Sanguínea:56(2,3%)|Ignorada/Outros:540
+
+INSTRUÇÕES: Responda em português brasileiro, de forma concisa (3-4 parágrafos curtos). Cite os dados acima para fundamentar as respostas. Contextualize com epidemiologia regional amazônica quando relevante. Mencione limitações (subnotificação, qualidade de dados) quando pertinente.`;
+
+async function sendMsg(){
+  const inp=document.getElementById('cinput');
+  const q=inp.value.trim();if(!q)return;inp.value='';
+  const msgs=document.getElementById('cmsgs');
+  msgs.innerHTML+=`<div class="msg u">${q}</div>`;
+  const tid='t'+Date.now();
+  msgs.innerHTML+=`<div class="msg t" id="${tid}">⏳ Analisando os dados...</div>`;
+  msgs.scrollTop=msgs.scrollHeight;
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:800,system:SYS,messages:[{role:'user',content:q}]})});
+    const d=await r.json();
+    const rep=(d.content||[]).map(b=>b.text||'').join('').replace(/\n/g,'<br>');
+    document.getElementById(tid).outerHTML=`<div class="msg b">${rep||'Não foi possível processar.'}</div>`;
+  }catch(e){
+    document.getElementById(tid).outerHTML=`<div class="msg b">Erro ao conectar ao serviço de análise. Tente novamente.</div>`;
+  }
+  msgs.scrollTop=msgs.scrollHeight;
+}
+</script>
+</body>
+</html>
