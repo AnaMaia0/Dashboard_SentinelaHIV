@@ -1,0 +1,242 @@
+window.SENTINELA_DATA = {
+    "meta": {
+        "titulo": "SentinelaHIV — Notificações de HIV/AIDS no Baixo Amazonas",
+        "fonte": "SINAN / DATASUS — Ministério da Saúde",
+        "painel_referencia": "https://www.gov.br/saude/pt-br/composicao/svsa/cnie/painel-hiv",
+        "recorte_temporal": "2016–2025",
+        "total_notificacoes": 2481,
+        "municipios_monitorados": 13,
+        "elaboracao": "SentinelaHIV · IEG/UFOPA · 2026",
+        "aviso_metodologico": "Dados representativos elaborados com base em padrões epidemiológicos regionais do SINAN/DATASUS para fins de demonstração acadêmica. Subnotificação, qualidade de preenchimento e cobertura assistencial afetam diretamente a série, especialmente em municípios de pequeno porte."
+    },
+    "serie_temporal": {
+        "anos": [
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+        ],
+        "notificacoes": [
+            157,
+            176,
+            204,
+            239,
+            126,
+            255,
+            289,
+            318,
+            346,
+            371
+        ],
+        "notas": {
+            "2020": "Queda de 47,3% atribuída à pandemia de COVID-19 e à interrupção dos fluxos de vigilância epidemiológica (SINAN)."
+        }
+    },
+    "municipios": {
+        "Santarém": [
+            89,
+            95,
+            112,
+            128,
+            73,
+            134,
+            148,
+            162,
+            171,
+            179
+        ],
+        "Oriximiná": [
+            18,
+            22,
+            25,
+            28,
+            15,
+            31,
+            35,
+            38,
+            42,
+            45
+        ],
+        "Óbidos": [
+            12,
+            14,
+            16,
+            19,
+            10,
+            21,
+            24,
+            27,
+            29,
+            32
+        ],
+        "Juruti": [
+            8,
+            9,
+            10,
+            13,
+            6,
+            14,
+            16,
+            18,
+            20,
+            22
+        ],
+        "Alenquer": [
+            7,
+            8,
+            9,
+            11,
+            5,
+            12,
+            14,
+            15,
+            17,
+            19
+        ],
+        "Monte Alegre": [
+            6,
+            7,
+            8,
+            10,
+            4,
+            11,
+            13,
+            14,
+            16,
+            18
+        ],
+        "Almeirim": [
+            5,
+            6,
+            7,
+            8,
+            4,
+            9,
+            10,
+            12,
+            13,
+            14
+        ],
+        "Mojuí dos Campos": [
+            3,
+            4,
+            4,
+            5,
+            2,
+            6,
+            7,
+            8,
+            9,
+            10
+        ],
+        "Prainha": [
+            3,
+            3,
+            4,
+            5,
+            2,
+            5,
+            6,
+            7,
+            8,
+            9
+        ],
+        "Terra Santa": [
+            2,
+            3,
+            3,
+            4,
+            2,
+            4,
+            5,
+            6,
+            7,
+            8
+        ],
+        "Faro": [
+            2,
+            2,
+            2,
+            3,
+            1,
+            3,
+            4,
+            4,
+            5,
+            6
+        ],
+        "Belterra": [
+            1,
+            2,
+            2,
+            3,
+            1,
+            3,
+            4,
+            4,
+            5,
+            5
+        ],
+        "Curuá": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            2,
+            3,
+            3,
+            4,
+            4
+        ]
+    },
+    "perfil_demografico": {
+        "sexo": {
+            "Feminino": 1143,
+            "Masculino": 1338
+        },
+        "faixa_etaria": {
+            "<5 anos": 23,
+            "5–12 anos": 15,
+            "13–19 anos": 187,
+            "20–29 anos": 681,
+            "30–39 anos": 724,
+            "40–49 anos": 456,
+            "50–59 anos": 231,
+            "60+ anos": 164
+        },
+        "raca_cor": {
+            "Parda": 1983,
+            "Branca": 198,
+            "Preta": 165,
+            "Indígena": 73,
+            "Amarela": 33,
+            "Ignorada": 29
+        }
+    },
+    "categoria_exposicao": {
+        "Sexual": 1687,
+        "Vertical": 198,
+        "Sanguínea": 56,
+        "Ignorada/Outros": 540
+    },
+    "kpis": {
+        "total_notificacoes": 2481,
+        "crescimento_decenal_pct": 136.3,
+        "ano_base": 157,
+        "ano_final": 371,
+        "municipio_maior_carga": "Santarém",
+        "pct_maior_carga": 52.0,
+        "casos_maior_carga": 1291,
+        "transmissao_vertical_casos": 198,
+        "transmissao_vertical_pct": 8.0,
+        "adolescentes_casos": 187,
+        "variacao_2020_pct": -47.3
+    }
+};
