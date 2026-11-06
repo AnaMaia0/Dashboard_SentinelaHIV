@@ -60,7 +60,9 @@
       background: var(--bg);
       color: var(--text);
       font-family: system-ui, -apple-system, sans-serif;
-      min-height: 100%
+      min-height: 100%;
+      /* CORREÇÃO: fonte base fluida para escalar bem em telas grandes */
+      font-size: clamp(14px, 1vw, 17px);
     }
 
     html {
@@ -79,14 +81,15 @@
     /* HEADER */
     .hdr {
       background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 55%, #0d9488 100%);
-      padding: 1.4rem 1.5rem;
+      padding: 1.4rem 2rem;
       top: env(safe-area-inset-top, 0px);
       position: sticky;
       z-index: 10
     }
 
     .hdr-in {
-      max-width: 1280px;
+      /* CORREÇÃO: max-width ampliado e usa 100% da largura disponível */
+      max-width: 1600px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -96,13 +99,13 @@
     }
 
     .hdr h1 {
-      font-size: 1.4rem;
+      font-size: clamp(1.1rem, 1.5vw, 1.6rem);
       font-weight: 700;
       color: #fff
     }
 
     .hdr p {
-      font-size: .8rem;
+      font-size: clamp(0.72rem, 0.85vw, 0.9rem);
       color: rgba(255, 255, 255, .75);
       margin-top: .2rem
     }
@@ -117,7 +120,7 @@
     .tag {
       background: rgba(255, 255, 255, .18);
       color: #fff;
-      font-size: .68rem;
+      font-size: clamp(0.62rem, 0.75vw, 0.75rem);
       padding: .18rem .55rem;
       border-radius: 999px
     }
@@ -136,26 +139,28 @@
       background: rgba(255, 255, 255, .28)
     }
 
-    /* LAYOUT */
+    /* LAYOUT — CORREÇÃO PRINCIPAL */
     .wrap {
-      max-width: 1280px;
+      /* Usa toda a largura disponível até 1600px, com padding lateral generoso */
+      max-width: 1600px;
       margin: 0 auto;
-      padding: 1.3rem
+      padding: 1.5rem 2rem;
     }
 
     /* KPI */
     .krow {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: .85rem;
-      margin-bottom: 1.3rem
+      /* CORREÇÃO: mínimo maior para aproveitar telas largas */
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.4rem
     }
 
     .kpi {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 11px;
-      padding: 1rem;
+      padding: 1.1rem 1.2rem;
       position: relative;
       overflow: hidden
     }
@@ -171,14 +176,14 @@
     }
 
     .kpi-l {
-      font-size: .67rem;
+      font-size: .68rem;
       text-transform: uppercase;
       letter-spacing: .06em;
       color: var(--muted)
     }
 
     .kpi-v {
-      font-size: 1.8rem;
+      font-size: clamp(1.6rem, 2.2vw, 2.2rem);
       font-weight: 700;
       color: var(--c, var(--accent));
       margin: .15rem 0
@@ -197,13 +202,13 @@
       padding: .75rem 1rem;
       font-size: .78rem;
       color: var(--amber);
-      margin-bottom: 1.3rem;
+      margin-bottom: 1.4rem;
       line-height: 1.55
     }
 
     /* SECTION */
     .sec {
-      margin-bottom: 1.8rem
+      margin-bottom: 2rem
     }
 
     .sec-h {
@@ -212,20 +217,20 @@
       color: var(--accent);
       border-left: 3px solid var(--accent);
       padding-left: .65rem;
-      margin-bottom: .75rem
+      margin-bottom: .85rem
     }
 
-    /* GRIDS */
+    /* GRIDS — CORREÇÃO: minmax maiores para aproveitar espaço */
     .g2 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: .85rem
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1rem
     }
 
     .g3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: .85rem
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem
     }
 
     /* CARD */
@@ -233,7 +238,7 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 11px;
-      padding: 1rem
+      padding: 1.1rem
     }
 
     .ct {
@@ -247,16 +252,17 @@
       position: relative
     }
 
+    /* CORREÇÃO: alturas dos gráficos maiores para telas grandes */
     .h200 {
-      height: 200px
+      height: clamp(200px, 18vh, 280px)
     }
 
     .h280 {
-      height: 280px
+      height: clamp(260px, 24vh, 380px)
     }
 
     .h340 {
-      height: 340px
+      height: clamp(300px, 28vh, 440px)
     }
 
     /* HIGHLIGHT BOX */
@@ -264,7 +270,7 @@
       background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: .65rem .8rem;
+      padding: .75rem .9rem;
       margin-bottom: .5rem
     }
 
@@ -276,7 +282,7 @@
     }
 
     .hl-v {
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 600;
       margin: .1rem 0
     }
@@ -330,7 +336,7 @@
       position: fixed;
       bottom: 4.3rem;
       right: 1.5rem;
-      width: 355px;
+      width: 380px;
       max-width: calc(100vw - 2rem);
       background: var(--card);
       border: 1px solid var(--border);
@@ -339,7 +345,7 @@
       z-index: 300;
       display: flex;
       flex-direction: column;
-      max-height: 510px
+      max-height: 540px
     }
 
     .cpanel.hidden {
@@ -453,6 +459,16 @@
       border-radius: 0 0 15px 0
     }
 
+    @media(max-width:768px) {
+      .wrap {
+        padding: 1rem
+      }
+
+      .hdr {
+        padding: 1rem 1rem
+      }
+    }
+
     @media(max-width:580px) {
       .hdr h1 {
         font-size: 1.1rem
@@ -467,12 +483,19 @@
         left: .5rem;
         width: auto
       }
+
+      .g2 {
+        grid-template-columns: 1fr
+      }
+
+      .g3 {
+        grid-template-columns: 1fr
+      }
     }
   </style>
 </head>
 
 <body>
-
   <header class="hdr">
     <div class="hdr-in">
       <div>
@@ -490,7 +513,6 @@
   </header>
 
   <div class="wrap">
-
     <div class="krow">
       <div class="kpi" style="--c:#14b8a6">
         <div class="kpi-l">Total Notificações</div>
@@ -611,7 +633,6 @@
   </div>
 
   <button class="cbtn" onclick="toggleChat()" title="Análise Conversacional">💬</button>
-
   <div class="cpanel hidden" id="cpanel">
     <div class="chead">
       <h4>🤖 Análise Conversacional — HIV/AIDS</h4>
@@ -662,25 +683,26 @@
     const C = ['#14b8a6', '#0ea5e9', '#f59e0b', '#f43f5e', '#8b5cf6', '#22c55e', '#fb923c', '#e879f9', '#a3e635', '#38bdf8', '#fb7185', '#c084fc', '#34d399'];
     const gc = (id) => document.getElementById(id).getContext('2d');
     const grd = { color: 'rgba(255,255,255,.04)' };
-    const tk = { color: '#6b8aaa', font: { size: 10 } };
+    const tk = { color: '#6b8aaa', font: { size: 11 } };
 
     new Chart(gc('cT'), { type: 'line', data: { labels: D.years, datasets: [{ label: 'Notificações', data: D.annual, borderColor: '#14b8a6', backgroundColor: 'rgba(20,184,166,.1)', fill: true, tension: .42, pointRadius: 5, pointHoverRadius: 8, borderWidth: 2.5, pointBackgroundColor: '#14b8a6' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${c.raw} notificações` } } }, scales: { x: { grid: grd, ticks: tk }, y: { grid: grd, ticks: tk, beginAtZero: true } } } });
 
     const mk = Object.keys(D.muni), mt = mk.map(k => D.muni[k].reduce((a, b) => a + b, 0)), ms = mk.map((k, i) => ({ k, v: mt[i] })).sort((a, b) => a.v - b.v);
-    new Chart(gc('cM'), { type: 'bar', data: { labels: ms.map(m => m.k), datasets: [{ data: ms.map(m => m.v), backgroundColor: C.slice(0, 13).reverse(), borderRadius: 4 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${c.raw} (${(c.raw / 2481 * 100).toFixed(1)}%)` } } }, scales: { x: { grid: grd, ticks: tk }, y: { ticks: { ...tk, font: { size: 9 } } } } } });
+    new Chart(gc('cM'), { type: 'bar', data: { labels: ms.map(m => m.k), datasets: [{ data: ms.map(m => m.v), backgroundColor: C.slice(0, 13).reverse(), borderRadius: 4 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${c.raw} (${(c.raw / 2481 * 100).toFixed(1)}%)` } } }, scales: { x: { grid: grd, ticks: tk }, y: { ticks: { ...tk, font: { size: 10 } } } } } });
 
     const top5 = mk.map(k => ({ k, tot: D.muni[k].reduce((a, b) => a + b, 0), v: D.muni[k] })).sort((a, b) => b.tot - a.tot).slice(0, 5);
-    new Chart(gc('cTop'), { type: 'line', data: { labels: D.years, datasets: top5.map((m, i) => ({ label: m.k, data: m.v, borderColor: C[i], backgroundColor: 'transparent', tension: .35, borderWidth: 2.2, pointRadius: 3 })) }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#6b8aaa', font: { size: 9 }, boxWidth: 10, padding: 6 } } }, scales: { x: { grid: grd, ticks: tk }, y: { grid: grd, ticks: tk, beginAtZero: true } } } });
+    new Chart(gc('cTop'), { type: 'line', data: { labels: D.years, datasets: top5.map((m, i) => ({ label: m.k, data: m.v, borderColor: C[i], backgroundColor: 'transparent', tension: .35, borderWidth: 2.2, pointRadius: 3 })) }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#6b8aaa', font: { size: 10 }, boxWidth: 10, padding: 6 } } }, scales: { x: { grid: grd, ticks: tk }, y: { grid: grd, ticks: tk, beginAtZero: true } } } });
 
-    new Chart(gc('cSex'), { type: 'doughnut', data: { labels: Object.keys(D.sex), datasets: [{ data: Object.values(D.sex), backgroundColor: ['#f43f5e', '#0ea5e9'], borderWidth: 0, hoverOffset: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom', labels: { color: '#6b8aaa', font: { size: 9 }, padding: 7 } } } } });
+    new Chart(gc('cSex'), { type: 'doughnut', data: { labels: Object.keys(D.sex), datasets: [{ data: Object.values(D.sex), backgroundColor: ['#f43f5e', '#0ea5e9'], borderWidth: 0, hoverOffset: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom', labels: { color: '#6b8aaa', font: { size: 10 }, padding: 7 } } } } });
 
-    new Chart(gc('cAge'), { type: 'bar', data: { labels: Object.keys(D.age), datasets: [{ data: Object.values(D.age), backgroundColor: '#8b5cf6', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#6b8aaa', font: { size: 8 }, maxRotation: 40 } }, y: { grid: grd, ticks: tk, beginAtZero: true } } } });
+    new Chart(gc('cAge'), { type: 'bar', data: { labels: Object.keys(D.age), datasets: [{ data: Object.values(D.age), backgroundColor: '#8b5cf6', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#6b8aaa', font: { size: 9 }, maxRotation: 40 } }, y: { grid: grd, ticks: tk, beginAtZero: true } } } });
 
-    new Chart(gc('cRace'), { type: 'doughnut', data: { labels: Object.keys(D.race), datasets: [{ data: Object.values(D.race), backgroundColor: ['#f59e0b', '#14b8a6', '#f43f5e', '#22c55e', '#8b5cf6', '#64748b'], borderWidth: 0, hoverOffset: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom', labels: { color: '#6b8aaa', font: { size: 8 }, padding: 5 } } } } });
+    new Chart(gc('cRace'), { type: 'doughnut', data: { labels: Object.keys(D.race), datasets: [{ data: Object.values(D.race), backgroundColor: ['#f59e0b', '#14b8a6', '#f43f5e', '#22c55e', '#8b5cf6', '#64748b'], borderWidth: 0, hoverOffset: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom', labels: { color: '#6b8aaa', font: { size: 9 }, padding: 5 } } } } });
 
     new Chart(gc('cExp'), { type: 'bar', data: { labels: Object.keys(D.exp), datasets: [{ data: Object.values(D.exp), backgroundColor: ['#14b8a6', '#f59e0b', '#f43f5e', '#64748b'], borderRadius: 6 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `${c.raw} (${(c.raw / 2481 * 100).toFixed(1)}%)` } } }, scales: { x: { ticks: tk }, y: { grid: grd, ticks: tk, beginAtZero: true } } } });
 
-    function toggleTheme() { const r = document.documentElement; r.dataset.theme = r.dataset.theme === 'dark' ? '' : ' dark' }
+    function toggleTheme() { const r = document.documentElement; r.dataset.theme = r.dataset.theme === 'dark' ? '' : 'dark' }
+
     let open = false;
     function toggleChat() { open = !open; document.getElementById('cpanel').classList.toggle('hidden', !open) }
     function ask(q) { document.getElementById('cinput').value = q; sendMsg() }
@@ -689,7 +711,6 @@
 
 DADOS (SINAN/DATASUS – 2016–2025 – 13 municípios):
 Total: 2.481 notificações
-
 Série temporal: 2016:157|2017:176|2018:204|2019:239|2020:126|2021:255|2022:289|2023:318|2024:346|2025:371
 Crescimento total 2016→2025: +136,3%
 
